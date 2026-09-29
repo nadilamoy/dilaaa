@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aesthetic Project & Resep Nasi Goreng</title>
+    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;500;600;700&family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <style>
+        :root {
+            --primary-pink: #ff758c;
+            --secondary-pink: #ff7eb3;
+            --light-pink: #fff0f3;
+            --accent-pink: #ff477e;
+            --text-dark: #590d22;
+            --text-muted: #800f2f;
+            --white: #ffffff;
+            --card-bg: rgba(255, 255, 255, 0.95);
+        }
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        body {
+            background: linear-gradient(135deg, #ffd1dc 0%, #ffc6ff 50%, #b5ead7 100%);
+            font-family: 'Quicksand', sans-serif;
+            min-height: 100vh;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .container {
+            width: 100%;
+            max-width: 850px;
+            background: var(--card-bg);
+            backdrop-filter: blur(10px);
+            border-radius: 30px;
+            box-shadow: 0 20px 40px rgba(255, 117, 140, 0.25);
+            border: 3px solid #ffffff;
+            padding: 40px;
+            position: relative;
+            overflow: hidden;
+        }
+        .page {
+            display: none;
+            animation: fadeIn 0.4s ease-in-out;
+        }
+        .page.active {
+            display: block;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        /* Navigasi Butang */
+        .nav-buttons {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 30px;
+            justify-content: center;
+        }
+        .btn {
+            padding: 12px 25px;
+            border-radius: 50px;
+            border: none;
+            font-family: 'Quicksand', sans-serif;
+            font-weight: 700;
+            font-size: 15px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .btn-js {
+            background: #a0c4ff;
+            color: #03045e;
+        }
+        .btn-js:hover {
+            background: #709dff;
+            transform: translateY(-2px);
+        }
+        .btn-switch {
+            background: linear-gradient(135deg, var(--primary-pink), var(--accent-pink));
+            color: white;
+        }
+        .btn-switch:hover {
+            opacity: 0.9;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(255, 71, 126, 0.4);
+        }
+        
+        /* Gaya Halaman Utama */
+        .title-main {
+            color: var(--text-dark);
+            font-size: 36px;
+            font-weight: 700;
+            margin-bottom: 25px;
+            text-align: center;
+            font-family: 'Poppins', sans-serif;
+        }
+        .card-section {
+            background: var(--light-pink);
+            border-radius: 20px;
+            padding: 25px;
+            margin-bottom: 20px;
+            border: 2px dashed #ffb3c6;
+            box-shadow: inset 0 2px 5px rgba(255,255,255,0.5);
+        }
+        .section-heading {
+            color: var(--text-dark);
+            font-size: 20px;
+            font-weight: 700;
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .group-list {
+            list-style: none;
+            padding-left: 5px;
+        }
+        .group-list li {
+            font-size: 17px;
+            color: var(--text-muted);
+            padding: 8px 0;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .group-list li i {
+            color: var(--accent-pink);
+        }
+        .info-text {
+            font-size: 16px;
+            color: var(--text-muted);
+            margin-bottom: 8px;
+            line-height: 1.5;
+            font-weight: 500;
+        }
+        .tech-list {
+            list-style: none;
+            margin-top: 8px;
+            padding-left: 5px;
+        }
+        .tech-list li {
+            font-size: 16px;
+            color: var(--text-muted);
+            padding: 4px 0;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-weight: 600;
+        }
+        .tech-list li i {
+            color: #ff70a6;
+        }
+        .profile-img-box {
+            text-align: center;
+            margin-top: 25px;
+        }
+        .profile-img-box img {
+            width: 130px;
+            height: 130px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 4px solid white;
+            box-shadow: 0 8px 20px rgba(255, 117, 140, 0.3);
+        }
+
+        /* Gaya Halaman Resep */
+        .recipe-header {
+            text-align: center;
+            margin-bottom: 25px;
+        }
+        .recipe-header img {
+            width: 100%;
+            max-height: 240px;
+            object-fit: cover;
+            border-radius: 20px;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+            margin-bottom: 15px;
+            border: 3px solid white;
+        }
+        .recipe-header h1 {
+            color: var(--text-dark);
+            font-size: 32px;
+            font-family: 'Poppins', sans-serif;
+        }
+        .recipe-card {
+            background: var(--light-pink);
+            border-radius: 20px;
+            padding: 22px;
+            margin-bottom: 20px;
+            border: 2px solid #ffb3c6;
+        }
+        .recipe-card h3 {
+            color: var(--text-dark);
+            font-size: 19px;
+            margin-bottom: 12px;
+            border-bottom: 2px solid #ffccd5;
+            padding-bottom: 8px;
+            font-family: 'Poppins', sans-serif;
+        }
+        .recipe-card ul, .recipe-card ol {
+            padding-left: 20px;
+        }
+        .recipe-card li {
+            font-size: 15px;
+            color: var(--text-muted);
+            margin-bottom: 8px;
+            line-height: 1.5;
+            font-weight: 500;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- HALAMAN 1: INDEX -->
+        <div id="page-index" class="page active">
+            <div class="nav-buttons">
+                <button class="btn btn-js" onclick="alert('✨ Internal JavaScript aktif & berjalan dengan sangat cute! ✨')"><i class="fa-solid fa-code"></i> Internal JS</button>
+                <button class="btn btn-switch" onclick="switchPage('resep')">Resep Nasi Goreng <i class="fa-solid fa-arrow-right"></i></button>
+            </div>
+
+            <h1 class="title-main">🌸 Latihan CSS Aesthetic 🌸</h1>
+
+            <div class="card-section">
+                <h2 class="section-heading"><i class="fa-solid fa-users"></i> Anggota Kelompok:</h2>
+                <ul class="group-list">
+                    <li><i class="fa-solid fa-heart"></i> 1. Almira Maylani Munif (4)</li>
+                    <li><i class="fa-solid fa-heart"></i> 2. Nadila Nurul Wahidah (27)</li>
+                </ul>
+            </div>
+
+            <div class="card-section">
+                <p class="info-text">✨ Ini adalah index dari project latihan CSS dengan nuansa pink yang menawan.</p>
+                <p class="info-text">💡 3 teknik penyisipan CSS yang digunakan:</p>
+                <ul class="tech-list">
+                    <li><i class="fa-solid fa-sparkles"></i> 1. Inline CSS</li>
+                    <li><i class="fa-solid fa-sparkles"></i> 2. Internal CSS</li>
+                    <li><i class="fa-solid fa-sparkles"></i> 3. External CSS</li>
+                </ul>
+            </div>
+
+            <div class="profile-img-box">
+                <!-- Foto Kucing Comel -->
+                <img src="https://images.unsplash.com/photo-1514888286974-6c03e2ca1dba?w=300" alt="Cute Cat">
+            </div>
+        </div>
+
+        <!-- HALAMAN 2: RESEP NASI GORENG -->
+        <div id="page-resep" class="page">
+            <div class="nav-buttons">
+                <button class="btn btn-js" onclick="alert('✨ Internal JavaScript aktif di Halaman Resep! ✨')"><i class="fa-solid fa-code"></i> Internal JS</button>
+                <button class="btn btn-switch" onclick="switchPage('index')"><i class="fa-solid fa-arrow-left"></i> Kembali ke Index</button>
+            </div>
+
+            <div class="recipe-header">
+                <img src="https://images.unsplash.com/photo-1603133872878-684f208fb84b?w=600" alt="Nasi Goreng">
+                <h1>🌸 Resep Nasi Goreng 🌸</h1>
+            </div>
+
+            <div class="recipe-card">
+                <h3>🍳 Bahan Utama</h3>
+                <ul>
+                    <li>1 piring nasi putih dingin</li>
+                    <li>2 siung bawang merah, iris tipis</li>
+                    <li>1 siung bawang putih, cincang halus</li>
+                    <li>1 butir telur ayam</li>
+                    <li>2 buah cabai merah (sesuai selera), iris serong</li>
+                    <li>1 sdm kecap manis</li>
+                    <li>1 sdm saus sambal / saus tomat</li>
+                    <li>Garam, gula, dan kaldu bubuk secukupnya</li>
+                    <li>Minyak goreng secukupnya untuk menumis</li>
+                </ul>
+            </div>
+
+            <div class="recipe-card">
+                <h3>🌿 Bahan Pelengkap (Opsional)</h3>
+                <ul>
+                    <li>Irisan mentimun dan tomat segar</li>
+                    <li>Kerupuk udang atau kerupuk ikan</li>
+                    <li>Bawang goreng untuk taburan</li>
+                </ul>
+            </div>
+
+            <div class="recipe-card">
+                <h3>👩‍🍳 Cara Membuat</h3>
+                <ol>
+                    <li>Panaskan sedikit minyak di atas wajan dengan api sedang.</li>
+                    <li>Masukkan irisan bawang merah dan bawang putih, tumis hingga harum dan berubah warna kecokelatan.</li>
+                    <li>Geser bumbu ke pinggir wajan, masukkan telur lalu orak-arik hingga matang.</li>
+                    <li>Masukkan nasi putih ke dalam wajan, aduk rata bersama bumbu dan telur.</li>
+                    <li>Tambahkan kecap manis, saus sambal, garam, gula, dan kaldu bubuk. Aduk terus hingga semua bumbu merata dan nasi panas mengepul.</li>
+                    <li>Koreksi rasa, jika sudah pas, angkat dan sajikan nasi goreng di piring dengan pelengkap irisan mentimun, tomat, serta taburan bawang goreng! ✨</li>
+                </ol>
+            </div>
+        </div>
+    </div>
+
+    <!-- Skrip JavaScript Penukaran Halaman -->
+    <script>
+        function switchPage(pageId) {
+            const pages = document.querySelectorAll('.page');
+            pages.forEach(p => p.classList.remove('active'));
+            document.getElementById('page-' + pageId).classList.add('active');
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+    </script>
+</body>
+</html>
